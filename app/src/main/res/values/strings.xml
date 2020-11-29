@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Rulate</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_profile">Профиль</string>
+    <string name="menu_novels">Новеллы</string>
+    <string name="menu_test">Тест</string>
+
+
+
+    <string name="registration">Регистрация</string>
+    <string name="register">Зарегистрироваться</string>
+
+    <string name="authorization">Авторизация</string>
+    <string name="authorize">Авторизоваться</string>
+
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="do_not_have_account_question">Нет аккаунта?\nНажми чтобы зарегистрироваться</string>
+    <string name="already_have_account_querstion">Зарегистрирован?\nНажми чтобы авторизоваться</string>
+
+    <string name="status">Статус</string>
+    <string name="sex">Пол</string>
+    <string name="books_count">Количество книг</string>
+    <string name="translated">Переведено</string>
+    <string name="karma">Карма</string>
+    <string name="cdate">Дата регистрации</string>
+    <string name="name">Имя</string>
+    <string name="country">Страна</string>
+    <string name="city">Город</string>
+    <string name="birthday">Дата рождения</string>
+    <string name="confirmed">Подтвержден</string>
+    <string name="comments_count">Количество комментариев</string>
+    <string name="email">email</string>
+
+    <string name="sex_male">Мужчина</string>
+    <string name="sex_female">Женщина</string>
+    <string name="sex_unknown">Не скажу</string>
+
+    <string name="save">Сохранить</string>
+    <string name="no_data">Нет данных</string>
+    <string name="all_fields_must_be_filled">Не все поля заполнены</string>
+    <string name="advertising">Реклама</string>
+    <string name="daily_top">Топ дня</string>
+    <string name="updates">Последние обновления</string>
+</resources>
