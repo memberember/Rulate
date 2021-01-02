@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/advertising" />
+
+            <View style="@style/bottomLine" />
+
+            <!--реклама-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_advertising"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/new_books" />
+
+            <View style="@style/bottomLine" />
+
+            <!--топ дня-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_daily_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/updates" />
+
+            <View style="@style/bottomLine" />
+
+            <!--последние обновления -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_updates"
+                android:layout_width="match_parent"
+                android:layout_height="600dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

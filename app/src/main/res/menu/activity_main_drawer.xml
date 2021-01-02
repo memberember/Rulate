@@ -12,9 +12,16 @@
             android:id="@+id/nav_novels"
             android:icon="@drawable/ic_baseline_library_books_24"
             android:title="@string/menu_novels" />
+
+        <item
+            android:id="@+id/nav_blog"
+            android:icon="@drawable/ic_baseline_article_24"
+            android:title="@string/menu_blog" />
+
         <item
             android:id="@+id/nav_test"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_test" />
     </group>
+
 </menu>

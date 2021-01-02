@@ -18,8 +18,16 @@
         tools:layout="@layout/fragment_novels" />
 
     <fragment
+        android:id="@+id/nav_blog"
+        android:name="tl.rulate.ru.ui.blog.BlogFragment"
+        android:label="@string/menu_blog"
+        tools:layout="@layout/fragment_blog" />
+
+    <fragment
         android:id="@+id/nav_test"
         android:name="tl.rulate.ru.ui.profile.RegisterFragment"
         android:label="@string/menu_test"
         tools:layout="@layout/fragment_register" />
+
+
 </navigation>

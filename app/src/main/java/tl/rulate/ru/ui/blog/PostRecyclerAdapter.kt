@@ -1,15 +1,15 @@
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_card_novel.view.*
-import tl.rulate.ru.JsonData.GetReadyJsonData
+import kotlinx.android.synthetic.main.item_post.view.*
+import tl.rulate.ru.JsonData.BlogJsonData
 import tl.rulate.ru.R
 
-class CardRecyclerAdapter(val items: MutableList<Title>) :
-    RecyclerView.Adapter<CardRecyclerAdapter.RecHolder>() {
-    var onItemClick: ((Title) -> Unit)? = null
+class PostRecyclerAdapter(val items: MutableList<BlogJsonData.PostData>) :
+    RecyclerView.Adapter<PostRecyclerAdapter.RecHolder>() {
+    var onItemClick: ((BlogJsonData.PostData) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
 
@@ -17,7 +17,7 @@ class CardRecyclerAdapter(val items: MutableList<Title>) :
 
         // указываем какую вьюху использовать, куда вставлять и заменять ли при вставке
         val view = inflater.inflate(
-            R.layout.item_card_novel,
+            R.layout.item_post,
             parent,
             false
         )
@@ -29,16 +29,13 @@ class CardRecyclerAdapter(val items: MutableList<Title>) :
     }
 
     override fun onBindViewHolder(holder: RecHolder, position: Int) {
+        val item = items[position]!!
         val defaultImage = "https://s.4pda.to/EmSL2n4fy6AgWnDxCWgsWIP5oDmaNp0Uxhs8.jpg"
 
-        val item = items[position]!!
-
-        holder.itemView.title_img2
-        holder.itemView.tv_title.setText(item.t_title)
-
-        Picasso.with(holder.itemView.title_img2.context)
-            .load(if (item.img.isNotBlank()) item.img else defaultImage)
-            .into(holder.itemView.title_img2)
+        holder.itemView.tv_title.setText(item.title)
+        holder.itemView.tv_post_content.setText(Html.fromHtml(item.body))
+        holder.itemView.tv_post_author.setText(item.author)
+        holder.itemView.tv_post_date.setText(item.time.toString())
     }
 
     // можно сделать пагинацию при помощи элементов, к примеру
@@ -47,7 +44,7 @@ class CardRecyclerAdapter(val items: MutableList<Title>) :
         return super.getItemViewType(position)
     }
 
-    fun set(list: MutableList<Title>) {
+    fun set(list: MutableList<BlogJsonData.PostData>) {
         this.items.clear()
         this.items.addAll(list)
         this.notifyDataSetChanged()

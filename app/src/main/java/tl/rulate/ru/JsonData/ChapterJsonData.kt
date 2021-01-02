@@ -5,8 +5,8 @@ data class ChapterJsonData(val status: String, val msg: String, val response: Re
     data class Response(
         var id: Int,
         var title: String,
-        var text: String,
-        var comments: List<String>
+        var text: String
+//        var comments: List<String>
 //        var prev_chap: Int,
 //        var next_chap: Int
     )

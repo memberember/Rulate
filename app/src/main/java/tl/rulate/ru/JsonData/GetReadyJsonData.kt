@@ -1,21 +1,18 @@
 package tl.rulate.ru.JsonData
 
-data class GetReadyJsonData(val status: String, val msg: String, val response: List<Title>) {
+import Title
 
-    data class Response(
-        val titles: List<Title>
-    )
+data class GetReadyJsonData(val status: String, val msg: String, val response: List<NovelChapter>) {
 
-    data class Title(
+    data class NovelChapter(
         val id: Int,
-        val book_id: Int,
-        val s_title: String,
         val t_title: String,
-        val title: String,
+        val s_title: String,
         val img: String,
+        val adult: Int,
+        val book_id: Int,
+        val title: String,
         val ready_date: String,
         val lang: String,
-        val adult: Int,
-        val rating: Double
-    )
+        val rating: Double        )
 }

@@ -9,12 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_reader.*
 import tl.rulate.ru.R
-import tl.rulate.ru.viewModels.MainViewModel
-import tl.rulate.ru.viewModels.ReaderViewModel
+import tl.rulate.ru.ui.novels.NovelsViewModel
 
 class ReaderFragment : Fragment() {
 
-    var mainViewModel = MainViewModel
+    var novelsViewModel = NovelsViewModel
     var readerViewModel = ReaderViewModel
 
 
@@ -30,15 +29,13 @@ class ReaderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // слушатель на обновление данных текста
         readerViewModel.text.observe(viewLifecycleOwner, Observer {
             tv_content.setText(Html.fromHtml(readerViewModel.text.value))
         })
 
-        backbtn.setOnClickListener {
-            readerViewModel.getBook(1134025,mainViewModel.lastBookId.value!!)
-        }
-
-        readerViewModel.getBook(1148726,mainViewModel.lastBookId.value!!)
+        // запрашиваем данные по главе
+        readerViewModel.chapter(novelsViewModel.lastChapterId.value!!)
 
     }
 }

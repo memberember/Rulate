@@ -30,29 +30,18 @@ class ProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        Log.d(
-            "DebugonCreate", "it"
-        )
+
         // считывание данных с sharedpref
         profileViewModel.dataUser.value = mainViewModel.sharedPref.user
         profileViewModel.myUserId.value = mainViewModel.myUserId.value
 
-        Log.d(
-            "DebugProfileFragment",
-            mainViewModel.sharedPref.user.id.toString() + " " + profileViewModel.myUserId.value.toString()
-        )
-
         // слушатель смены фрагментов
         profileViewModel.currentFragment.observe(this, Observer {
             it?.let {
-                Log.d("DebugProfileFragmenCurF", it.toString())
                 inflateToFragmentPlace(it)
             }
         })
 
-        Log.d(
-            "DebugProfileFragment1", "it"
-        )
         // если пользователь уже был авторизован, то открываем профиль иначе авторизацию
         if (isUserAuthorized()) {
             profileViewModel.currentFragment.value = UserProfileFragment()
@@ -67,7 +56,6 @@ class ProfileFragment : Fragment() {
 
         // слушатель на изменение данных текущего пользователя
         profileViewModel.dataUser.observe(viewLifecycleOwner, Observer {
-            Log.d("DebugProfileFragmenVLO", it.id.toString())
 
             // инфлейтим фрагмент профиля
             if (isUserAuthorized())
@@ -82,10 +70,7 @@ class ProfileFragment : Fragment() {
         // если пользователь логинится, то данные передаются в mainViewModel
         profileViewModel.myUserId.observe(viewLifecycleOwner, Observer {
             if (isUserAuthorized()) {
-                Log.d(
-                    "DebugProfilemyUserId",
-                    it.toString() + profileViewModel.myUserId.value.toString()
-                )
+
                 mainViewModel.myUserId.value = profileViewModel.myUserId.value
                 profileViewModel.getUser(it)
             }

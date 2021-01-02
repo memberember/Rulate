@@ -1,5 +1,7 @@
 package tl.rulate.ru.api
 
+import AdsJsonData
+import NewBooksJsonData
 import io.reactivex.Single
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -175,7 +177,10 @@ interface Api {
     ): Single<PostJsonData>
 
 
-//    // Получить все комментарии к посту
+//    ): Single<createPostJsonData>
+
+
+    //    // Получить все комментарии к посту
 //    @POST("postComments")
 //    fun postComments(
 //        @Query("post_id") post_id: Int
@@ -194,24 +199,21 @@ interface Api {
 //        @Query("token") token: String,
 //        @Query("title") title: String,
 //        @Query("body") body: String
-//    ): Single<createPostJsonData>
-
-
-    // ##############################################БЛОГ#############################################
+// ##############################################БЛОГ#############################################
 //    // Получить список категорий блога
 //    @POST("blogCats")
 //    fun blogCats(
 //    ): Single<blogCatsJsonData>
 //
 //
-//    // Получить все посты из категории блога
-//    @POST("blog")
-//    fun blog(
-//
+    // Получить все посты из категории блога
+    @POST("blog")
+    fun blog(
+        @Query("key") key: String,
 //        @Query("topic") topic: Int,
-//        @Query("limit") limit: Int,
-//        @Query("page") page: Int
-//    ): Single<blogJsonData>
+        @Query("limit") limit: Int,
+        @Query("page") page: Int
+    ): Single<BlogJsonData>
 //
 //
 //    // ##############################################КОМАНДА#############################################
@@ -237,7 +239,7 @@ interface Api {
 //
 //
 //    // ##############################################АНОНСЫ#############################################
-//    // Получить список анонсов
+//    // Получить список анонсов\новости переводов
 //    @POST("announces")
 //    fun announces(
 //        @Query("limit") limit: Int,
@@ -245,14 +247,39 @@ interface Api {
 //    ): Single<announcesJsonData>
 //
 //
-    // ##############################################ПЕРЕВОДЫ#############################################
-    // Получить список последних переведённых глав
+// ##############################################ПЕРЕВОДЫ#############################################
+// Получить список последних переведённых глав
+    /** Последние обновления **/
     @POST("getReady")
     fun getReady(
         @Query("key") key: String, // key
         @Query("limit") limit: Int = 100,
         @Query("page") page: Int = 1
     ): Single<GetReadyJsonData>
+
+    // Получить список новых книг
+    /** Новинки **/
+    @POST("newBooks")
+    fun newBooks(
+        @Query("key") key: String // key
+    ): Single<NewBooksJsonData>
+
+    // Получить список новых книг
+    /** Реклама **/
+    @POST("ads")
+    fun ads(
+        @Query("key") key: String // key
+    ): Single<AdsJsonData>
+
+    // Получить список трендов
+    /** Тренды **/
+    //todo сделать
+    @POST("trends")
+    fun trends(
+        @Query("key") key: String // key
+    ): Single<AdsJsonData>
+
+
 //
 //    // Получить все комментарии к переводу
 //    @POST("bookComments")
@@ -280,20 +307,21 @@ interface Api {
 //        @Query("search") search: String
 //    ): Single<searchBooksJsonData>
 //
-//    // Получить данные о переводе
-//    @POST("book")
-//    fun book(
-//        @Query("book_id") book_id: Int,
-//        @Query("token") token: String
-//    ): Single<bookJsonData>
+    // Получить данные о переводе
+    @POST("book")
+    fun book(
+        @Query("key") key: String, // key
+        @Query("book_id") book_id: Int,
+        @Query("token") token: String
+    ): Single<BookJsonData>
 //
     // Получить текст главы
     @POST("chapter")
     fun chapter(
         @Query("key") key: String, // key
-        @Query("book_id") book_id: Int,
         @Query("chapter_id") chapter_id: Int,
-        @Query("token") token: String
+        @Query("token") token: String,
+        @Query("book_id") book_id: Int = 1
     ): Single<ChapterJsonData>
 //
 //

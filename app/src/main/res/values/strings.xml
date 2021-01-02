@@ -12,6 +12,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_profile">Профиль</string>
     <string name="menu_novels">Новеллы</string>
+    <string name="menu_blog">Блог</string>
     <string name="menu_test">Тест</string>
 
 
@@ -50,6 +51,12 @@
     <string name="no_data">Нет данных</string>
     <string name="all_fields_must_be_filled">Не все поля заполнены</string>
     <string name="advertising">Реклама</string>
-    <string name="daily_top">Топ дня</string>
+    <string name="new_books">Новинки</string>
     <string name="updates">Последние обновления</string>
+    <string name="post_title">Заголовок</string>
+    <string name="post_text">Текст поста</string>
+    <string name="post_author">Автор поста</string>
+    <string name="post_date">Дата поста</string>
+    <string name="book_title">Название книги</string>
+    <string name="book_description">Описание книги</string>
 </resources>

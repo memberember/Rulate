@@ -7,9 +7,9 @@ import kotlinx.android.synthetic.main.item_wide_card_novel.view.*
 import tl.rulate.ru.JsonData.GetReadyJsonData
 import tl.rulate.ru.R
 
-class WideCardRecyclerAdapter(val items: MutableList<GetReadyJsonData.Title>) :
+class WideCardRecyclerAdapter(val items: MutableList<GetReadyJsonData.NovelChapter>) :
     RecyclerView.Adapter<WideCardRecyclerAdapter.RecHolder>() {
-    var onItemClick: ((GetReadyJsonData.Title) -> Unit)? = null
+    var onItemClick: ((GetReadyJsonData.NovelChapter) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
 
@@ -36,6 +36,7 @@ class WideCardRecyclerAdapter(val items: MutableList<GetReadyJsonData.Title>) :
         holder.itemView.tv_title.setText(item.t_title)
         holder.itemView.tv_chapter.setText(item.title)
         holder.itemView.tv_lang.setText(item.lang)
+        item.id
 
         Picasso.with(holder.itemView.title_img2.context)
             .load(if (item.img.isNotBlank()) item.img else defaultImage)
@@ -48,7 +49,7 @@ class WideCardRecyclerAdapter(val items: MutableList<GetReadyJsonData.Title>) :
         return super.getItemViewType(position)
     }
 
-    fun set(list: MutableList<GetReadyJsonData.Title>) {
+    fun set(list: MutableList<GetReadyJsonData.NovelChapter>) {
         this.items.clear()
         this.items.addAll(list)
         this.notifyDataSetChanged()

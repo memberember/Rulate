@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/novels_fragment_place"
+        android:id="@+id/blog_fragment_place"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
