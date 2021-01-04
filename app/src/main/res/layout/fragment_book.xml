@@ -38,10 +38,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/book_description" />
 
-            <ListView
-                android:id="@+id/lv_chapters"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chapters"
                 android:layout_width="match_parent"
-                android:layout_height="400dp" />
+                android:layout_height="600dp" />
 
             <ListView
                 android:id="@+id/lv_comments"

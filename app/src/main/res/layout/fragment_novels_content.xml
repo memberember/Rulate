@@ -39,7 +39,7 @@
 
             <!--топ дня-->
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_daily_top"
+                android:id="@+id/rv_new_books"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

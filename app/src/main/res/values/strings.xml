@@ -59,4 +59,7 @@
     <string name="post_date">Дата поста</string>
     <string name="book_title">Название книги</string>
     <string name="book_description">Описание книги</string>
+    <string name="chapter_title">Название главы</string>
+    <string name="chapter_status">Статус</string>
+    <string name="chapter_can_read">Доступность</string>
 </resources>

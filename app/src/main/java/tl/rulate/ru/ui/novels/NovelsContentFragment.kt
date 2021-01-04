@@ -1,9 +1,8 @@
 package tl.rulate.ru.ui.novels
 
-import CardRecyclerAdapter
-import WideCardRecyclerAdapter
+import CRTitleAdapter
+import CRWideLastUpdatesAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_novels_content.*
 import tl.rulate.ru.R
 import tl.rulate.ru.ui.BookFragment
-import tl.rulate.ru.ui.ReaderFragment
 
 class NovelsContentFragment : Fragment() {
     private var novelsViewModel = NovelsViewModel
 
     // адаптеры рекламы, новинок и последних обновлений
-    var adsAdapter = CardRecyclerAdapter(mutableListOf())
-    var newBooksAdapter = CardRecyclerAdapter(mutableListOf())
-    var wideAdapter = WideCardRecyclerAdapter(mutableListOf())
+    var adsAdapter = CRTitleAdapter(mutableListOf())
+    var newBooksAdapter = CRTitleAdapter(mutableListOf())
+    var lastUpdatesAdapter = CRWideLastUpdatesAdapter(mutableListOf())
 
 
     override fun onCreateView(
@@ -42,10 +40,6 @@ class NovelsContentFragment : Fragment() {
         novelsViewModel.getReady()
         novelsViewModel.newBooks()
         novelsViewModel.ads()
-
-        // todo хрень для тестов
-//        novelsViewModel.lastBookId.value = 25507
-//        novelsViewModel.currentFragment.value = BookFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,11 +52,11 @@ class NovelsContentFragment : Fragment() {
         rv_advertising.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true)
 
-        rv_daily_top.adapter = newBooksAdapter
-        rv_daily_top.layoutManager =
+        rv_new_books.adapter = newBooksAdapter
+        rv_new_books.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-        rv_updates.adapter = wideAdapter
+        rv_updates.adapter = lastUpdatesAdapter
         rv_updates.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         novelsViewModel.toastMessage.observe(viewLifecycleOwner, Observer {
@@ -72,7 +66,7 @@ class NovelsContentFragment : Fragment() {
 
         // ставим слушатели на изменение данных какого либо адаптера
         novelsViewModel.novels.observe(viewLifecycleOwner, Observer {
-            wideAdapter.set(it)
+            lastUpdatesAdapter.set(it)
         })
 
         novelsViewModel.newBooks.observe(viewLifecycleOwner, Observer {
@@ -85,22 +79,21 @@ class NovelsContentFragment : Fragment() {
 
         // устанавливаем слушатели на элементы адаптеров
         newBooksAdapter.onItemClick = { novel ->
-            novelsViewModel.lastChapterId.value = novel.id
+            novelsViewModel.lastBookId.value = novel.id
             novelsViewModel.currentFragment.value =
-                ReaderFragment()
+                BookFragment()
         }
 
         adsAdapter.onItemClick = { novel ->
-            novelsViewModel.lastChapterId.value = novel.id
+            novelsViewModel.lastBookId.value = novel.id
             novelsViewModel.currentFragment.value =
-                ReaderFragment()
+                BookFragment()
         }
 
-        wideAdapter.onItemClick = { novel ->
+        lastUpdatesAdapter.onItemClick = { novel ->
             novelsViewModel.lastBookId.value = novel.book_id
-            novelsViewModel.lastChapterId.value = novel.id
             novelsViewModel.currentFragment.value =
-                ReaderFragment()
+                BookFragment()
         }
     }
 }

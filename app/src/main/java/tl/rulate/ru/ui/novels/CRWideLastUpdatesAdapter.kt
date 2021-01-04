@@ -3,13 +3,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_card_novel.view.*
+import kotlinx.android.synthetic.main.item_wide_card_novel.view.*
 import tl.rulate.ru.JsonData.GetReadyJsonData
 import tl.rulate.ru.R
 
-class CardRecyclerAdapter(val items: MutableList<Title>) :
-    RecyclerView.Adapter<CardRecyclerAdapter.RecHolder>() {
-    var onItemClick: ((Title) -> Unit)? = null
+class CRWideLastUpdatesAdapter(val items: MutableList<GetReadyJsonData.NovelChapter>) :
+    RecyclerView.Adapter<CRWideLastUpdatesAdapter.RecHolder>() {
+    var onItemClick: ((GetReadyJsonData.NovelChapter) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
 
@@ -17,7 +17,7 @@ class CardRecyclerAdapter(val items: MutableList<Title>) :
 
         // указываем какую вьюху использовать, куда вставлять и заменять ли при вставке
         val view = inflater.inflate(
-            R.layout.item_card_novel,
+            R.layout.item_wide_card_novel,
             parent,
             false
         )
@@ -33,8 +33,10 @@ class CardRecyclerAdapter(val items: MutableList<Title>) :
 
         val item = items[position]!!
 
-        holder.itemView.title_img2
         holder.itemView.tv_title.setText(item.t_title)
+        holder.itemView.tv_chapter.setText(item.title)
+        holder.itemView.tv_lang.setText(item.lang)
+        item.id
 
         Picasso.with(holder.itemView.title_img2.context)
             .load(if (item.img.isNotBlank()) item.img else defaultImage)
@@ -47,7 +49,7 @@ class CardRecyclerAdapter(val items: MutableList<Title>) :
         return super.getItemViewType(position)
     }
 
-    fun set(list: MutableList<Title>) {
+    fun set(list: MutableList<GetReadyJsonData.NovelChapter>) {
         this.items.clear()
         this.items.addAll(list)
         this.notifyDataSetChanged()
