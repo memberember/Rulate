@@ -35,8 +35,6 @@ class NovelsFragment : Fragment() {
                     .commitAllowingStateLoss()
             }
         })
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

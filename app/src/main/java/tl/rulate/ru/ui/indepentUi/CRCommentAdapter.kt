@@ -1,14 +1,18 @@
+package tl.rulate.ru.ui.indepentUi
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_card_novel.view.*
+import kotlinx.android.synthetic.main.item_comment.view.*
+import tl.rulate.ru.JsonData.BookJsonData
 import tl.rulate.ru.R
+import java.util.*
 
-class CRTitleAdapter(val items: MutableList<Title>) :
-    RecyclerView.Adapter<CRTitleAdapter.RecHolder>() {
-    var onItemClick: ((Title) -> Unit)? = null
+class CRCommentAdapter(val items: MutableList<BookJsonData.Comment>) :
+    RecyclerView.Adapter<CRCommentAdapter.RecHolder>() {
+    var onItemClick: ((BookJsonData.Comment) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
 
@@ -16,7 +20,7 @@ class CRTitleAdapter(val items: MutableList<Title>) :
 
         // указываем какую вьюху использовать, куда вставлять и заменять ли при вставке
         val view = inflater.inflate(
-            R.layout.item_card_novel,
+            R.layout.item_comment,
             parent,
             false
         )
@@ -32,12 +36,14 @@ class CRTitleAdapter(val items: MutableList<Title>) :
 
         val item = items[position]!!
 
-        holder.itemView.iv_title
-        holder.itemView.tv_title.setText(item.t_title)
+        holder.itemView.tv_author_name.text = item.author
+        holder.itemView.tv_comment_date.text="["+Date(item.time.toLong()).toString()+"]"
+        holder.itemView.tv_comment_body.text = item.body
 
-        Picasso.with(holder.itemView.iv_title.context)
-            .load(if (item.img.isNotBlank()) item.img else defaultImage)
-            .into(holder.itemView.iv_title)
+        Picasso.with(holder.itemView.iv_comment_avatar.context)
+            .load(if (item.avatar.isNotBlank()) item.avatar else defaultImage)
+            .into(holder.itemView.iv_comment_avatar)
+
     }
 
     // можно сделать пагинацию при помощи элементов, к примеру
@@ -46,7 +52,7 @@ class CRTitleAdapter(val items: MutableList<Title>) :
         return super.getItemViewType(position)
     }
 
-    fun set(list: MutableList<Title>) {
+    fun set(list: MutableList<BookJsonData.Comment>) {
         this.items.clear()
         this.items.addAll(list)
         this.notifyDataSetChanged()
@@ -58,7 +64,6 @@ class CRTitleAdapter(val items: MutableList<Title>) :
                 onItemClick?.invoke(items[adapterPosition])
             }
         }
-
     }
 }
 

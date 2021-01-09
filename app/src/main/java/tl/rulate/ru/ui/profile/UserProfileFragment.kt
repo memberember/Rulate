@@ -9,13 +9,11 @@ import androidx.lifecycle.Observer
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import tl.rulate.ru.R
-import tl.rulate.ru.ui.profile.LoginFragment
 import tl.rulate.ru.ui.profile.ProfileViewModel
-import tl.rulate.ru.viewModels.MainViewModel
 
 class UserProfileFragment : Fragment() {
     private var profileViewModel = ProfileViewModel
-    var mainViewModel = MainViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

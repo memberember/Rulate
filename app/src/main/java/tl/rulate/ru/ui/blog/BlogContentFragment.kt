@@ -27,10 +27,15 @@ class BlogContentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //todo добавил пагинацию
+
+        // установка адаптера для списка постов
         rv_posts.adapter = postsAdapter
         rv_posts.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
+        // отслеживание изменений постов
         blogViewModel.posts.observe(viewLifecycleOwner, Observer {
             postsAdapter.set(it)
         })

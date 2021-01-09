@@ -1,4 +1,4 @@
-package tl.rulate.ru.ui
+package tl.rulate.ru.ui.indepentUi
 
 
 import android.util.Log
@@ -6,17 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import tl.rulate.ru.Constants
-import tl.rulate.ru.JsonData.BookJsonData
 import tl.rulate.ru.viewModels.BaseViewModel
-import tl.rulate.ru.viewModels.MainViewModel
 
-object BookViewModel : BaseViewModel() {
-    var book: MutableLiveData<BookJsonData.Response> = MutableLiveData()
+object ReaderViewModel : BaseViewModel() {
+    var toastMessage: MutableLiveData<String> = MutableLiveData()
+    var text: MutableLiveData<String> = MutableLiveData()
 
-    fun book(bookId: Int) {
-        ApiDpc.book(
+    fun chapter(chapter_id: Int) {
+        ApiDpc.chapter(
             key = Constants.KEY,
-            book_id = bookId,
+            chapter_id = chapter_id,
             token = ""
 
         )
@@ -25,17 +24,20 @@ object BookViewModel : BaseViewModel() {
             .subscribe({ result ->
 
                 // тостер
+                toastMessage.value = result.msg
 
                 // если ответ не нулевой то выполняется действия
                 if (result.status == "success") {
-                    book.value = result.response
+                    Log.d("getBook", "${result.response.text} ")
+                    text.value = result.response.text
 
                 } else {
-                    // todo ответ о том что результат неудачный
+                    text.value = result.msg
                 }
             }, { error ->
                 Log.d("getBookError", "${error.message} ")
-// todo ответ об ошибке
+
+                toastMessage.value = error.message
             })
     }
 }

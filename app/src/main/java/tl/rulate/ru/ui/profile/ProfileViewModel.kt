@@ -1,12 +1,10 @@
 package tl.rulate.ru.ui.profile
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import tl.rulate.ru.Constants
-import tl.rulate.ru.SharedPrefManager
 import tl.rulate.ru.data.DataUser
 import tl.rulate.ru.viewModels.BaseViewModel
 
@@ -19,14 +17,10 @@ object ProfileViewModel: BaseViewModel() {
     var userName: MutableLiveData<String> = MutableLiveData("testuser998")
     var userPass: MutableLiveData<String> = MutableLiveData("testpassword998")
     var myUserId: MutableLiveData<Int> = MutableLiveData(-1)
-    var isLogoutPressed: MutableLiveData<Boolean> = MutableLiveData(false)
-    lateinit var sharedPref: SharedPrefManager
-
-    init {
-        Log.d("Debug", "MVVM INI ProfileViewModel")
-    }
+    var myUserToken: MutableLiveData<String> = MutableLiveData()
 
     fun getUser(userId: Int) {
+
         ApiDpc.getUser(
             key = Constants.KEY,
             user_id = userId
@@ -101,7 +95,9 @@ object ProfileViewModel: BaseViewModel() {
 
                 // если ответ не нулевой то выполняется действия
                 if (result.response != null) {
+
                     myUserId.value = result.response.id
+                    myUserToken.value = result.response.token
                 }
 
             }, { error ->

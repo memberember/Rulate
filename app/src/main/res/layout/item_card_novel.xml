@@ -17,7 +17,7 @@
         <ImageView
             android:scaleType="centerCrop"
             android:src="@color/colorAccent"
-            android:id="@+id/title_img2"
+            android:id="@+id/iv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent" />

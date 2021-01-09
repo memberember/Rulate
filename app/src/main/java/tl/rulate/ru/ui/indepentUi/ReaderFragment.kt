@@ -1,4 +1,4 @@
-package tl.rulate.ru.ui
+package tl.rulate.ru.ui.indepentUi
 
 import android.os.Bundle
 import android.text.Html
@@ -31,7 +31,7 @@ class ReaderFragment : Fragment() {
 
         // слушатель на обновление данных текста
         readerViewModel.text.observe(viewLifecycleOwner, Observer {
-            tv_content.setText(Html.fromHtml(readerViewModel.text.value))
+            tv_content.setText(Html.fromHtml(ReaderViewModel.text.value))
         })
 
         // запрашиваем данные по главе

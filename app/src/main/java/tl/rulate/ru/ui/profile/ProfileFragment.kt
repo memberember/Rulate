@@ -1,22 +1,21 @@
 package tl.rulate.ru.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import tl.rulate.ru.R
+import tl.rulate.ru.data.SharedPrefData
 import tl.rulate.ru.ui.UserProfileFragment
 import tl.rulate.ru.viewModels.MainViewModel
 
 class ProfileFragment : Fragment() {
-    // todo перетащить метод getUser
 
     var mainViewModel = MainViewModel
-    private var profileViewModel = ProfileViewModel
+    var profileViewModel = ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,10 +30,6 @@ class ProfileFragment : Fragment() {
 
         super.onCreate(savedInstanceState)
 
-        // считывание данных с sharedpref
-        profileViewModel.dataUser.value = mainViewModel.sharedPref.user
-        profileViewModel.myUserId.value = mainViewModel.myUserId.value
-
         // слушатель смены фрагментов
         profileViewModel.currentFragment.observe(this, Observer {
             it?.let {
@@ -42,46 +37,36 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        // если пользователь уже был авторизован, то открываем профиль иначе авторизацию
-        if (isUserAuthorized()) {
-            profileViewModel.currentFragment.value = UserProfileFragment()
-        } else {
-            profileViewModel.currentFragment.value = LoginFragment()
-        }
-
+        openRequiredForm()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // слушатель на изменение данных текущего пользователя
-        profileViewModel.dataUser.observe(viewLifecycleOwner, Observer {
-
-            // инфлейтим фрагмент профиля
-            if (isUserAuthorized())
-                profileViewModel.currentFragment.value = UserProfileFragment()
-
-            // если полученный пользователь это я, то сохраняем в кеш
-            if (it.id == profileViewModel.myUserId.value) {
-                mainViewModel.sharedPref.saveUser(it)
+        mainViewModel.isLogoutPressed.observe(viewLifecycleOwner, Observer {
+            it.let {
+                profileViewModel.dataUser = MutableLiveData()
+                profileViewModel.myUserToken = MutableLiveData()
+                profileViewModel.myUserId = MutableLiveData()
+                mainViewModel.isLogoutPressed = MutableLiveData()
+                openRequiredForm()
             }
         })
 
-        // если пользователь логинится, то данные передаются в mainViewModel
-        profileViewModel.myUserId.observe(viewLifecycleOwner, Observer {
-            if (isUserAuthorized()) {
+        // слушатель изменения dataUser
+        profileViewModel.myUserToken.observe(viewLifecycleOwner, Observer {
 
-                mainViewModel.myUserId.value = profileViewModel.myUserId.value
-                profileViewModel.getUser(it)
+            it.let {
+                mainViewModel.sharedPref.saveUser(
+                    SharedPrefData(
+                        id = profileViewModel.myUserId.value!!,
+                        token = profileViewModel.myUserToken.value!!
+                    )
+                )
+
+                openRequiredForm()
             }
         })
-
-
-        //todo иногда срабатывает при загрузке активити
-        // тостер
-//        profileViewModel.toastMessage.observe(viewLifecycleOwner, Observer {
-//            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-//        })
     }
 
     private fun inflateToFragmentPlace(fragment: Fragment) {
@@ -89,9 +74,21 @@ class ProfileFragment : Fragment() {
             .replace(R.id.profile_fragment_place, fragment).commitAllowingStateLoss()
     }
 
+    // функция проверки авторизованности пользователя
     private fun isUserAuthorized(): Boolean {
-        if (profileViewModel.myUserId.value != -1)
+        if (mainViewModel.sharedPref.user.id != -1)
             return true
         return false
+    }
+
+    // функция открытия необходимой формы
+    private fun openRequiredForm() {
+        // если пользователь уже был авторизован, то открываем профиль иначе авторизацию
+        if (isUserAuthorized()) {
+            profileViewModel.getUser(mainViewModel.sharedPref.user.id)
+            profileViewModel.currentFragment.value = UserProfileFragment()
+        } else {
+            profileViewModel.currentFragment.value = LoginFragment()
+        }
     }
 }

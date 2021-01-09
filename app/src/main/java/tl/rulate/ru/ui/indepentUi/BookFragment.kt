@@ -1,6 +1,5 @@
-package tl.rulate.ru.ui
+package tl.rulate.ru.ui.indepentUi
 
-import CRChapterAdapter
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_book.*
-import kotlinx.android.synthetic.main.fragment_novels_content.*
 import tl.rulate.ru.R
 import tl.rulate.ru.ui.novels.NovelsViewModel
 
@@ -20,6 +18,8 @@ class BookFragment : Fragment() {
     private var bookViewModel = BookViewModel
 
     var chaptersAdapter = CRChapterAdapter(mutableListOf())
+    var commentsAdapter = CRCommentAdapter(mutableListOf())
+
 
 
     override fun onCreateView(
@@ -34,8 +34,13 @@ class BookFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // установка адаптеров для списка глав и комментов
         rv_chapters.adapter = chaptersAdapter
         rv_chapters.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        rv_comments.adapter = commentsAdapter
+        rv_comments.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
 
@@ -50,9 +55,11 @@ class BookFragment : Fragment() {
                 tv_book_description.setText(Html.fromHtml(bookViewModel.book.value!!.description))
                 tv_book_title.setText(bookViewModel.book.value!!.t_title)
                 chaptersAdapter.set(it.chapters.toMutableList())
+                commentsAdapter.set(it.comments.toMutableList())
             }
         })
 
+        // слушатель на нажатие главы
         chaptersAdapter.onItemClick = { chapter ->
             novelsViewModel.lastChapterId.value = chapter.id
             novelsViewModel.currentFragment.value =

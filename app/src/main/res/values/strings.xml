@@ -62,4 +62,9 @@
     <string name="chapter_title">Название главы</string>
     <string name="chapter_status">Статус</string>
     <string name="chapter_can_read">Доступность</string>
+    <string name="comment">Комментарий</string>
+    <string name="author_name">Автор</string>
+    <string name="date">Дата</string>
+    <string name="comments">Комментарии</string>
+    <string name="chapters">Главы</string>
 </resources>

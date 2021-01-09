@@ -36,11 +36,10 @@ class CRWideLastUpdatesAdapter(val items: MutableList<GetReadyJsonData.NovelChap
         holder.itemView.tv_title.setText(item.t_title)
         holder.itemView.tv_chapter.setText(item.title)
         holder.itemView.tv_lang.setText(item.lang)
-        item.id
 
-        Picasso.with(holder.itemView.title_img2.context)
+        Picasso.with(holder.itemView.iv_title.context)
             .load(if (item.img.isNotBlank()) item.img else defaultImage)
-            .into(holder.itemView.title_img2)
+            .into(holder.itemView.iv_title)
     }
 
     // можно сделать пагинацию при помощи элементов, к примеру

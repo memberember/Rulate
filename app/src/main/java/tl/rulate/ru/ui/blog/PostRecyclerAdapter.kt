@@ -30,8 +30,6 @@ class PostRecyclerAdapter(val items: MutableList<BlogJsonData.PostData>) :
 
     override fun onBindViewHolder(holder: RecHolder, position: Int) {
         val item = items[position]!!
-        val defaultImage = "https://s.4pda.to/EmSL2n4fy6AgWnDxCWgsWIP5oDmaNp0Uxhs8.jpg"
-
         holder.itemView.tv_title.setText(item.title)
         holder.itemView.tv_post_content.setText(Html.fromHtml(item.body))
         holder.itemView.tv_post_author.setText(item.author)

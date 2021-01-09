@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_novels_content.*
 import tl.rulate.ru.R
-import tl.rulate.ru.ui.BookFragment
+import tl.rulate.ru.ui.indepentUi.BookFragment
 
 class NovelsContentFragment : Fragment() {
     private var novelsViewModel = NovelsViewModel

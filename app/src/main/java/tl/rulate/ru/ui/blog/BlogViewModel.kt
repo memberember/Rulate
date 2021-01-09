@@ -18,6 +18,7 @@ object BlogViewModel : BaseViewModel() {
         blog()
     }
 
+    // функция запроса данных с блога
     fun blog() {
         ApiDpc.blog(key = Constants.KEY, limit = 10, page = 1)
             .observeOn(AndroidSchedulers.mainThread())

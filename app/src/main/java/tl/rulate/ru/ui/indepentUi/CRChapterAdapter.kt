@@ -1,3 +1,5 @@
+package tl.rulate.ru.ui.indepentUi
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
