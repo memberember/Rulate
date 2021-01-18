@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_post.view.*
 import tl.rulate.ru.JsonData.BlogJsonData
 import tl.rulate.ru.R
+import java.util.*
 
 class PostRecyclerAdapter(val items: MutableList<BlogJsonData.PostData>) :
     RecyclerView.Adapter<PostRecyclerAdapter.RecHolder>() {
@@ -30,10 +31,10 @@ class PostRecyclerAdapter(val items: MutableList<BlogJsonData.PostData>) :
 
     override fun onBindViewHolder(holder: RecHolder, position: Int) {
         val item = items[position]!!
-        holder.itemView.tv_title.setText(item.title)
-        holder.itemView.tv_post_content.setText(Html.fromHtml(item.body))
-        holder.itemView.tv_post_author.setText(item.author)
-        holder.itemView.tv_post_date.setText(item.time.toString())
+        holder.itemView.tv_title.text = item.title
+        holder.itemView.tv_post_content.text = Html.fromHtml(item.body)
+        holder.itemView.tv_post_author.text = item.author
+        holder.itemView.tv_post_date.text = "["+ Date(item.time.toLong()).toString()+"]"
     }
 
     // можно сделать пагинацию при помощи элементов, к примеру

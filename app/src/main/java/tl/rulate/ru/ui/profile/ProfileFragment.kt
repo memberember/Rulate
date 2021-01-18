@@ -1,12 +1,14 @@
 package tl.rulate.ru.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.fragment_user_profile.*
 import tl.rulate.ru.R
 import tl.rulate.ru.data.SharedPrefData
 import tl.rulate.ru.ui.UserProfileFragment
@@ -55,18 +57,20 @@ class ProfileFragment : Fragment() {
 
         // слушатель изменения dataUser
         profileViewModel.myUserToken.observe(viewLifecycleOwner, Observer {
-
+            Log.d("Debug","токен изменился на"+it)
             it.let {
+
                 mainViewModel.sharedPref.saveUser(
                     SharedPrefData(
                         id = profileViewModel.myUserId.value!!,
                         token = profileViewModel.myUserToken.value!!
                     )
                 )
-
                 openRequiredForm()
             }
         })
+
+
     }
 
     private fun inflateToFragmentPlace(fragment: Fragment) {
@@ -74,17 +78,13 @@ class ProfileFragment : Fragment() {
             .replace(R.id.profile_fragment_place, fragment).commitAllowingStateLoss()
     }
 
-    // функция проверки авторизованности пользователя
-    private fun isUserAuthorized(): Boolean {
-        if (mainViewModel.sharedPref.user.id != -1)
-            return true
-        return false
-    }
+
 
     // функция открытия необходимой формы
     private fun openRequiredForm() {
+
         // если пользователь уже был авторизован, то открываем профиль иначе авторизацию
-        if (isUserAuthorized()) {
+        if (mainViewModel.isUserAuthorized()) {
             profileViewModel.getUser(mainViewModel.sharedPref.user.id)
             profileViewModel.currentFragment.value = UserProfileFragment()
         } else {

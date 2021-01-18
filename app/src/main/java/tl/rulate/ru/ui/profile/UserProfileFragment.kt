@@ -10,9 +10,11 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import tl.rulate.ru.R
 import tl.rulate.ru.ui.profile.ProfileViewModel
+import tl.rulate.ru.viewModels.MainViewModel
 
 class UserProfileFragment : Fragment() {
     private var profileViewModel = ProfileViewModel
+    var mainViewModel = MainViewModel
 
 
     override fun onCreateView(
@@ -33,15 +35,10 @@ class UserProfileFragment : Fragment() {
             profileDataInitialize()
         })
 
-
-//        // кнопка выхода из логина
-//        tv_login.setOnClickListener {
-//            mainViewModel.sharedPref.clear()
-//
-//            //todo баг с тем что не срабатывает ошибка
-//            profileViewModel.myUserId.value = -1
-//            profileViewModel.currentFragment.value = LoginFragment()
-//        }
+        iv_exit.setOnClickListener {
+            mainViewModel.sharedPref.clear()
+            mainViewModel.isLogoutPressed.value = true
+        }
     }
 
     // инициализация данных

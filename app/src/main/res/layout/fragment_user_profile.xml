@@ -44,7 +44,7 @@
 
             <!--edit button-->
             <ImageView
-                android:id="@+id/iv_edit"
+                android:id="@+id/iv_exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:clickable="true"
-                android:src="@android:drawable/ic_menu_edit" />
+                android:src="@drawable/ic_baseline_exit_to_app_24" />
 
             <!--login-->
             <TextView

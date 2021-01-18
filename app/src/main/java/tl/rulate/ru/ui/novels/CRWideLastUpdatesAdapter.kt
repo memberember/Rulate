@@ -1,3 +1,4 @@
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,6 +7,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_wide_card_novel.view.*
 import tl.rulate.ru.JsonData.GetReadyJsonData
 import tl.rulate.ru.R
+import kotlin.coroutines.coroutineContext
 
 class CRWideLastUpdatesAdapter(val items: MutableList<GetReadyJsonData.NovelChapter>) :
     RecyclerView.Adapter<CRWideLastUpdatesAdapter.RecHolder>() {
@@ -29,18 +31,24 @@ class CRWideLastUpdatesAdapter(val items: MutableList<GetReadyJsonData.NovelChap
     }
 
     override fun onBindViewHolder(holder: RecHolder, position: Int) {
-        val defaultImage = "https://s.4pda.to/EmSL2n4fy6AgWnDxCWgsWIP5oDmaNp0Uxhs8.jpg"
 
         val item = items[position]!!
 
-        holder.itemView.tv_title.setText(item.t_title)
-        holder.itemView.tv_chapter.setText(item.title)
-        holder.itemView.tv_lang.setText(item.lang)
+        holder.itemView.tv_title.text = item.t_title
+        holder.itemView.tv_chapter.text = item.title
+        holder.itemView.tv_lang.text = item.lang
+        holder.itemView.tv_date.text = item.ready_date
 
         Picasso.with(holder.itemView.iv_title.context)
-            .load(if (item.img.isNotBlank()) item.img else defaultImage)
+            .load(if (item.img.isNotBlank()) Uri.parse( item.img ); else
+                Uri.parse("android.resource://tl.rulate.ru/drawable/default_image"))
+            .error(R.drawable.default_image)
             .into(holder.itemView.iv_title)
+
+
+
     }
+
 
     // можно сделать пагинацию при помощи элементов, к примеру
     // когда тип элемента = 1 то значит что нужно выводить новую порцию данных

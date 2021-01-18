@@ -14,14 +14,10 @@ object NovelsViewModel : BaseViewModel() {
     var novels: MutableLiveData<MutableList<GetReadyJsonData.NovelChapter>> = MutableLiveData()
     var newBooks: MutableLiveData<MutableList<Title>> = MutableLiveData()
     var ads: MutableLiveData<MutableList<Title>> = MutableLiveData()
-
     var currentFragment: MutableLiveData<Fragment> = MutableLiveData()
-    var lastBookId: MutableLiveData<Int> = MutableLiveData()
-    var lastChapterId: MutableLiveData<Int> = MutableLiveData()
 
     init {
         currentFragment.value = NovelsContentFragment()
-//        novels.value = mutableListOf(title)
     }
 
 

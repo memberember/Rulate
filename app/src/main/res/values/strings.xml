@@ -67,4 +67,15 @@
     <string name="date">Дата</string>
     <string name="comments">Комментарии</string>
     <string name="chapters">Главы</string>
+    <string name="menu_bookmarks">Закладки</string>
+    <string name="bookmarks">Закладки</string>
+    <string name="user_is_not_authorized">Пользователь не авторизован</string>
+    <string name="add_to_bookmarks">Добавить в закладки</string>
+    <string name="search_hint">Введите фразу поиска</string>
+    <string name="menu_search">Найти книгу</string>
+    <string name="search">Найти</string>
+    <string name="menu_read">Читалка</string>
+    <string name="menu_book_about">О книге</string>
+    <string name="its_your_first_book">Вы еще не открывали книг</string>
+    <string name="its_your_first_chapter">Вы еще ничего не читали</string>
 </resources>

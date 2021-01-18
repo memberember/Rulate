@@ -7,4 +7,5 @@ object Constants {
     val VK_USER_ID = 579322014
     val REGISTER_ACTIVITY = "REGISTER_ACTIVITY"
     val LOGIN_ACTIVITY = "LOGIN_ACTIVITY"
+    val DEBUG = "DEBUG"
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,6 +21,13 @@
                 android:layout_gravity="center"
                 android:padding="20dp"
                 android:src="@drawable/ic_android_black_24dp" />
+
+            <Button
+                android:id="@+id/btn_add_to_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/add_to_bookmarks" />
 
             <TextView
                 android:id="@+id/tv_book_title"
@@ -68,4 +75,13 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_book_warning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/design_default_color_background"
+        android:gravity="center"
+        android:text="@string/its_your_first_book"
+        android:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

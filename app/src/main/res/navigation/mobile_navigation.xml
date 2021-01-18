@@ -24,10 +24,27 @@
         tools:layout="@layout/fragment_blog" />
 
     <fragment
-        android:id="@+id/nav_test"
-        android:name="tl.rulate.ru.ui.profile.RegisterFragment"
-        android:label="@string/menu_test"
-        tools:layout="@layout/fragment_register" />
+        android:id="@+id/nav_bookmarks"
+        android:name="tl.rulate.ru.ui.bookmarks.BookmarksFragment"
+        android:label="@string/menu_bookmarks"
+        tools:layout="@layout/fragment_bookmarks" />
 
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="tl.rulate.ru.ui.search.SearchFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/nav_read"
+        android:name="tl.rulate.ru.ui.indepentUi.ReaderFragment"
+        android:label="@string/menu_read"
+        tools:layout="@layout/fragment_reader" />
+
+    <fragment
+        android:id="@+id/nav_book_about"
+        android:name="tl.rulate.ru.ui.indepentUi.BookFragment"
+        android:label="@string/menu_book_about"
+        tools:layout="@layout/fragment_book" />
 
 </navigation>

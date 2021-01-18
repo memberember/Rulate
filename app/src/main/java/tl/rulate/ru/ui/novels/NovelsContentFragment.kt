@@ -3,6 +3,7 @@ package tl.rulate.ru.ui.novels
 import CRTitleAdapter
 import CRWideLastUpdatesAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_novels_content.*
+import tl.rulate.ru.Constants
 import tl.rulate.ru.R
-import tl.rulate.ru.ui.indepentUi.BookFragment
+import tl.rulate.ru.viewModels.MainViewModel
 
 class NovelsContentFragment : Fragment() {
     private var novelsViewModel = NovelsViewModel
+    private var mainViewModel = MainViewModel
 
     // адаптеры рекламы, новинок и последних обновлений
     var adsAdapter = CRTitleAdapter(mutableListOf())
@@ -44,6 +47,7 @@ class NovelsContentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(Constants.DEBUG+"NCF", object : Any() {}.javaClass.enclosingMethod?.name!!)
 
 
 
@@ -59,6 +63,7 @@ class NovelsContentFragment : Fragment() {
         rv_updates.adapter = lastUpdatesAdapter
         rv_updates.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
         novelsViewModel.toastMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
@@ -75,25 +80,21 @@ class NovelsContentFragment : Fragment() {
 
         novelsViewModel.ads.observe(viewLifecycleOwner, Observer {
             adsAdapter.set(it)
+            Log.d(Constants.DEBUG, "adsobserve")
+
         })
 
         // устанавливаем слушатели на элементы адаптеров
         newBooksAdapter.onItemClick = { novel ->
-            novelsViewModel.lastBookId.value = novel.id
-            novelsViewModel.currentFragment.value =
-                BookFragment()
+            mainViewModel.lastBookId.value = novel.id
         }
 
         adsAdapter.onItemClick = { novel ->
-            novelsViewModel.lastBookId.value = novel.id
-            novelsViewModel.currentFragment.value =
-                BookFragment()
+            mainViewModel.lastBookId.value = novel.id
         }
 
         lastUpdatesAdapter.onItemClick = { novel ->
-            novelsViewModel.lastBookId.value = novel.book_id
-            novelsViewModel.currentFragment.value =
-                BookFragment()
+            mainViewModel.lastBookId.value = novel.book_id
         }
     }
 }

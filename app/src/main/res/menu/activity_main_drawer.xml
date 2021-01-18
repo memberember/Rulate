@@ -8,6 +8,16 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_baseline_person_24"
             android:title="@string/menu_profile" />
+
+        <item
+            android:id="@+id/nav_bookmarks"
+            android:icon="@drawable/ic_baseline_bookmark_border_24"
+            android:title="@string/menu_bookmarks" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_novels"
             android:icon="@drawable/ic_baseline_library_books_24"
@@ -19,9 +29,19 @@
             android:title="@string/menu_blog" />
 
         <item
-            android:id="@+id/nav_test"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_test" />
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="@string/menu_search" />
+
+        <item
+            android:id="@+id/nav_book_about"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="@string/menu_book_about" />
+
+        <item
+            android:id="@+id/nav_read"
+            android:icon="@drawable/ic_baseline_menu_book_24"
+            android:title="@string/menu_read" />
     </group>
 
 </menu>

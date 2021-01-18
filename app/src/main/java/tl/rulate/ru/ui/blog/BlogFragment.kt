@@ -9,8 +9,6 @@ import androidx.lifecycle.Observer
 import tl.rulate.ru.R
 
 class BlogFragment : Fragment() {
-    private var blogViewModel = BlogViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

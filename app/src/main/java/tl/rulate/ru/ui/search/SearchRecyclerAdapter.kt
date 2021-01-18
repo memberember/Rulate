@@ -4,12 +4,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_card_novel.view.*
+import kotlinx.android.synthetic.main.item_wide_card_novel.view.*
 import tl.rulate.ru.R
 
-class CRTitleAdapter(val items: MutableList<Title>) :
-    RecyclerView.Adapter<CRTitleAdapter.RecHolder>() {
-    var onItemClick: ((Title) -> Unit)? = null
+class SearchRecyclerAdapter(val items: MutableList<SearchBooksJsonData.Titles>) :
+    RecyclerView.Adapter<SearchRecyclerAdapter.RecHolder>() {
+    var onItemClick: ((SearchBooksJsonData.Titles) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
 
@@ -17,7 +17,7 @@ class CRTitleAdapter(val items: MutableList<Title>) :
 
         // указываем какую вьюху использовать, куда вставлять и заменять ли при вставке
         val view = inflater.inflate(
-            R.layout.item_card_novel,
+            R.layout.item_wide_card_novel,
             parent,
             false
         )
@@ -29,11 +29,15 @@ class CRTitleAdapter(val items: MutableList<Title>) :
     }
 
     override fun onBindViewHolder(holder: RecHolder, position: Int) {
+        val defaultImage = "https://s.4pda.to/EmSL2n4fy6AgWnDxCWgsWIP5oDmaNp0Uxhs8.jpg"
 
         val item = items[position]!!
 
-        holder.itemView.iv_title
-        holder.itemView.tv_title.setText(item.t_title)
+        holder.itemView.tv_title.text = item.t_title
+        holder.itemView.tv_chapter.text = "Автор: ${item.author}"
+        holder.itemView.tv_date.text = "Глав: ${item.n_chapters}"
+        holder.itemView.tv_lang.text = item.lang
+
 
         Picasso.with(holder.itemView.iv_title.context)
             .load(if (item.img.isNotBlank()) Uri.parse( item.img ); else
@@ -48,7 +52,7 @@ class CRTitleAdapter(val items: MutableList<Title>) :
         return super.getItemViewType(position)
     }
 
-    fun set(list: MutableList<Title>) {
+    fun set(list: MutableList<SearchBooksJsonData.Titles>) {
         this.items.clear()
         this.items.addAll(list)
         this.notifyDataSetChanged()

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bookmarks" />
+
+            <View style="@style/bottomLine" />
+
+            <!--реклама-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_bookmarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:background="@color/design_default_color_background"
+        android:id="@+id/tv_bookmarks_warning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/user_is_not_authorized"
+        android:visibility="visible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

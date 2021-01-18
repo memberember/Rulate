@@ -1,5 +1,6 @@
 package tl.rulate.ru.ui.indepentUi
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,9 @@ class CRCommentAdapter(val items: MutableList<BookJsonData.Comment>) :
         holder.itemView.tv_comment_body.text = item.body
 
         Picasso.with(holder.itemView.iv_comment_avatar.context)
-            .load(if (item.avatar.isNotBlank()) item.avatar else defaultImage)
+            .load(if (item.avatar.isNotBlank()) Uri.parse( item.avatar ); else
+                Uri.parse("android.resource://tl.rulate.ru/drawable/default_image"))
+            .error(R.drawable.default_image)
             .into(holder.itemView.iv_comment_avatar)
 
     }

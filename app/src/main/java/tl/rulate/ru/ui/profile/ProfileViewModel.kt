@@ -1,5 +1,6 @@
 package tl.rulate.ru.ui.profile
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -98,6 +99,9 @@ object ProfileViewModel: BaseViewModel() {
 
                     myUserId.value = result.response.id
                     myUserToken.value = result.response.token
+
+                    Log.d("Debug","Авторизация успешна, токены:"+result.response.token+" "+myUserToken.value )
+
                 }
 
             }, { error ->

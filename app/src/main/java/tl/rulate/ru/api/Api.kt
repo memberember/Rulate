@@ -1,7 +1,9 @@
 package tl.rulate.ru.api
 
+import AddBookmarkJsonData
 import AdsJsonData
 import NewBooksJsonData
+import SearchBooksJsonData
 import io.reactivex.Single
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -36,90 +38,93 @@ interface Api {
         @Query("token") token: String,
         @Query("new_pass") new_pass: String
     ): Single<ChangePasswordJsonData>
-/*
 
-    // Список всех переводов, в которых участвует пользователь
-    @POST("userBooks") // название метода
-    fun userBooks(
-        @Query("user_id") user_id: Int
-    ): Single<UserBooksJsonData> 
+    /*
 
-    // Список всех комментариев пользователя
-    @POST("userComments") // название метода
-    fun userComments(
-        @Query("token") token: String,
-        @Query("mode") mode: String,
-        @Query("limit") limit: Int,
-        @Query("page") page: Int
-    ): Single<UserCommentsJsonData> 
+        // Список всех переводов, в которых участвует пользователь
+        @POST("userBooks") // название метода
+        fun userBooks(
+            @Query("user_id") user_id: Int
+        ): Single<UserBooksJsonData>
 
-    // Получить карму пользователя
-    @POST("karma") // название метода
-    fun karma(
-        @Query("user_id") user_id: Int,
-        @Query("type") type: Int
-    ): Single<KarmaJsonData> 
+        // Список всех комментариев пользователя
+        @POST("userComments") // название метода
+        fun userComments(
+            @Query("token") token: String,
+            @Query("mode") mode: String,
+            @Query("limit") limit: Int,
+            @Query("page") page: Int
+        ): Single<UserCommentsJsonData>
 
-    // Изменить карму пользователя
-    @POST("addKarma") // название метода
-    fun addKarma(
-        @Query("token") token: String,
-        @Query("to_user") to_user: Int,
-        @Query("mark") mark: Int,
-        @Query("note") note: String
-    ): Single<AddKarmaJsonData> 
+        // Получить карму пользователя
+        @POST("karma") // название метода
+        fun karma(
+            @Query("user_id") user_id: Int,
+            @Query("type") type: Int
+        ): Single<KarmaJsonData>
+
+        // Изменить карму пользователя
+        @POST("addKarma") // название метода
+        fun addKarma(
+            @Query("token") token: String,
+            @Query("to_user") to_user: Int,
+            @Query("mark") mark: Int,
+            @Query("note") note: String
+        ): Single<AddKarmaJsonData>
 
 
-    // Получить оповещения
-    @POST("notices")
-    fun notices(
-        @Query("token") token: String,
-        @Query("limit") limit: Int,
-        @Query("page") page: Int,
-        @Query("new_only") new_only: Int
-    ): Single<noticesJsonData>
+        // Получить оповещения
+        @POST("notices")
+        fun notices(
+            @Query("token") token: String,
+            @Query("limit") limit: Int,
+            @Query("page") page: Int,
+            @Query("new_only") new_only: Int
+        ): Single<noticesJsonData>
 
-    // Принять приглашение на участие в переводе
-    @POST("membershipAccept")
-    fun membershipAccept(
-        @Query("token") token: String,
-        @Query("book_id") book_id: Int
-    ): Single<membershipAcceptJsonData>
+        // Принять приглашение на участие в переводе
+        @POST("membershipAccept")
+        fun membershipAccept(
+            @Query("token") token: String,
+            @Query("book_id") book_id: Int
+        ): Single<membershipAcceptJsonData>
 
-    // Отказаться от приглашения участвовать в переводе
-    @POST("membershipDecline")
-    fun membershipDecline(
-        @Query("token") token: String,
-        @Query("book_id") book_id: Int
-    ): Single<membershipDeclineJsonData>
+        // Отказаться от приглашения участвовать в переводе
+        @POST("membershipDecline")
+        fun membershipDecline(
+            @Query("token") token: String,
+            @Query("book_id") book_id: Int
+        ): Single<membershipDeclineJsonData>
 
-    // Получить контакты пользователя
-    @POST("userContacts")
-    fun userContacts(
-        @Query("user_id") user_id: Int
-    ): Single<userContactsJsonData>
+        // Получить контакты пользователя
+        @POST("userContacts")
+        fun userContacts(
+            @Query("user_id") user_id: Int
+        ): Single<userContactsJsonData>
 
-    // Получить отслеживаемые главы
-    @POST("bookmarksChapters")
-    fun bookmarksChapters(
-        @Query("token") token: String,
-        @Query("limit") limit: Int,
-        @Query("page") page: Int
-    ): Single<bookmarksChaptersJsonData>
-
+        // Получить отслеживаемые главы
+        @POST("bookmarksChapters")
+        fun bookmarksChapters(
+            @Query("token") token: String,
+            @Query("limit") limit: Int,
+            @Query("page") page: Int
+        ): Single<bookmarksChaptersJsonData>
+    */
     // Получить закладки пользователя
     @POST("bookmarks")
     fun bookmarks(
+        @Query("key") key: String,
         @Query("token") token: String
-    ): Single<bookmarksJsonData>
+    ): Single<BookmarksJsonData>
 
     // Добавить перевод в закладки
     @POST("addBookmark")
     fun addBookmark(
+        @Query("key") key: String,
         @Query("book_id") book_id: Int,
         @Query("token") token: String
-    ): Single<addBookmarkJsonData>
-
+    ): Single<AddBookmarkJsonData>
+/*
     // Удалить перевод из закладок
     @POST("removeBookmark")
     fun removeBookmark(
@@ -273,7 +278,6 @@ interface Api {
 
     // Получить список трендов
     /** Тренды **/
-    //todo сделать
     @POST("trends")
     fun trends(
         @Query("key") key: String // key
@@ -301,12 +305,13 @@ interface Api {
 //    ): Single<booksJsonData>
 
 
-    //    // Поиск по переводам
-//    @POST("searchBooks")
-//    fun searchBooks(
-//        @Query("search") search: String
-//    ): Single<searchBooksJsonData>
-//
+    // Поиск по переводам
+    @POST("searchBooks")
+    fun searchBooks(
+        @Query("key") key: String, // key
+        @Query("t") search: String
+    ): Single<SearchBooksJsonData>
+
     // Получить данные о переводе
     @POST("book")
     fun book(
@@ -314,7 +319,8 @@ interface Api {
         @Query("book_id") book_id: Int,
         @Query("token") token: String
     ): Single<BookJsonData>
-//
+
+    //
     // Получить текст главы
     @POST("chapter")
     fun chapter(

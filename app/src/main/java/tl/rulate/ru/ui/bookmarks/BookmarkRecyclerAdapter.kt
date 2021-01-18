@@ -1,15 +1,17 @@
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_card_novel.view.*
+import kotlinx.android.synthetic.main.item_wide_card_novel.view.*
+import tl.rulate.ru.JsonData.BookmarksJsonData
 import tl.rulate.ru.R
 
-class CRTitleAdapter(val items: MutableList<Title>) :
-    RecyclerView.Adapter<CRTitleAdapter.RecHolder>() {
-    var onItemClick: ((Title) -> Unit)? = null
+class BookmarkRecyclerAdapter(val items: MutableList<BookmarksJsonData.Bookmark>) :
+    RecyclerView.Adapter<BookmarkRecyclerAdapter.RecHolder>() {
+    var onItemClick: ((BookmarksJsonData.Bookmark) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
 
@@ -17,7 +19,7 @@ class CRTitleAdapter(val items: MutableList<Title>) :
 
         // указываем какую вьюху использовать, куда вставлять и заменять ли при вставке
         val view = inflater.inflate(
-            R.layout.item_card_novel,
+            R.layout.item_wide_card_novel,
             parent,
             false
         )
@@ -31,9 +33,10 @@ class CRTitleAdapter(val items: MutableList<Title>) :
     override fun onBindViewHolder(holder: RecHolder, position: Int) {
 
         val item = items[position]!!
-
-        holder.itemView.iv_title
-        holder.itemView.tv_title.setText(item.t_title)
+        holder.itemView.tv_title.text = item.t_title
+        holder.itemView.tv_chapter.text = item.author
+        holder.itemView.tv_lang.text = "Лайков: ${item.likes}"
+        holder.itemView.tv_date.text = "Статус: ${item.status}"
 
         Picasso.with(holder.itemView.iv_title.context)
             .load(if (item.img.isNotBlank()) Uri.parse( item.img ); else
@@ -48,7 +51,7 @@ class CRTitleAdapter(val items: MutableList<Title>) :
         return super.getItemViewType(position)
     }
 
-    fun set(list: MutableList<Title>) {
+    fun set(list: MutableList<BookmarksJsonData.Bookmark>) {
         this.items.clear()
         this.items.addAll(list)
         this.notifyDataSetChanged()
