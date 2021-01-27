@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,21 +13,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--avatar-->
-            <ImageView
-                android:id="@+id/iv_book_img"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:padding="20dp"
-                android:src="@drawable/ic_android_black_24dp" />
-
-            <Button
-                android:id="@+id/btn_add_to_bookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/add_to_bookmarks" />
 
             <TextView
                 android:id="@+id/tv_book_title"
@@ -37,7 +22,111 @@
                 android:gravity="center"
                 android:text="@string/book_title" />
 
+            <!--avatar-->
+            <ImageView
+                android:id="@+id/iv_book_img"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:src="@drawable/ic_baseline_highlight_off_24" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/propertyText"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rating" />
+
+                    <TextView
+                        style="@style/propertyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quality_rating" />
+
+                    <TextView
+                        style="@style/propertyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/likes" />
+
+                    <TextView
+                        style="@style/propertyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/author_name" />
+
+                    <TextView
+                        style="@style/propertyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/origin_status" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_rating"
+                        style="@style/ordinaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/rating" />
+
+                    <TextView
+                        android:id="@+id/tv_quality_rating"
+                        style="@style/ordinaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/quality_rating" />
+
+                    <TextView
+                        android:id="@+id/tv_likes"
+                        style="@style/ordinaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/likes" />
+
+                    <TextView
+                        android:id="@+id/tv_author_name"
+                        style="@style/ordinaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/author_name" />
+
+                    <TextView
+                        android:id="@+id/tv_origin_status"
+                        style="@style/ordinaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/origin_status" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_add_to_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/add_to_bookmarks" />
+
             <TextView
+                style="@style/ordinaryText"
                 android:id="@+id/tv_book_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,7 +145,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chapters"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <View style="@style/bottomLine" />
 
@@ -73,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/tv_book_warning"
@@ -82,6 +172,6 @@
         android:background="@color/design_default_color_background"
         android:gravity="center"
         android:text="@string/its_your_first_book"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

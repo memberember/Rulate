@@ -78,4 +78,12 @@
     <string name="menu_book_about">О книге</string>
     <string name="its_your_first_book">Вы еще не открывали книг</string>
     <string name="its_your_first_chapter">Вы еще ничего не читали</string>
+    <string name="rating">Произведение: </string>
+    <string name="quality_rating">Качество перевода:</string>
+    <string name="likes">Лайков: </string>
+    <string name="origin_status">Выпуск</string>
+    <string name="group">Группа</string>
+    <string name="genres">Жанры</string>
+    <string name="tags">Тэги</string>
+    <string name="fandom">Фэндом</string>
 </resources>

@@ -1,6 +1,7 @@
 package tl.rulate.ru
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -53,7 +54,11 @@ class MainActivity : AppCompatActivity() {
         // левое окно теперь не закрывает основной экран а сдвигает его.
         val content = findViewById<ConstraintLayout>(R.id.content)
         val toggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         ) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 super.onDrawerSlide(drawerView, slideOffset)
@@ -70,11 +75,17 @@ class MainActivity : AppCompatActivity() {
 
 
         fab.setOnClickListener {
+//            Log.d(Constants.DEBUG, "Saved")
+//            mainViewModel.sharedPref.saveBook(
+//                SharedPrefBookData(1, 1)
+//            )
         }
 
         fab1.setOnClickListener {
-//            mainViewModel.sharedPref.clear()
-//            mainViewModel.isLogoutPressed.value = true
+//            Log.d(
+//                Constants.DEBUG,
+//                "book chapter = ${mainViewModel.sharedPref.book.lastChapterId} bookid = ${mainViewModel.sharedPref.book.lastBookId}"
+//            )
         }
 
 
@@ -91,26 +102,32 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun setObservers(){
+    private fun setObservers() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         mainViewModel.lastBookId.observe(this, Observer {
 
-            //todo делать сохранение книги
-//            mainViewModel.sharedPref.saveBook(SharedPrefBookData(
-//                it,
-//                mainViewModel.lastChapterId.value?:-1
-//            ))
-            navController.navigate(R.id.nav_book_about)
+            //todo делать сохранение книги в БД
+            mainViewModel.sharedPref.saveBook(
+                SharedPrefBookData(
+                    it,
+                    mainViewModel.lastChapterId.value ?: -1
+                )
+            )
+
+            if (it != -1)
+                navController.navigate(R.id.nav_book_about)
         })
 
         mainViewModel.lastChapterId.observe(this, Observer {
-            //todo делать сохранение книги
-//            mainViewModel.sharedPref.saveBook(SharedPrefBookData(
-//                mainViewModel.lastBookId.value?:-1
-//                ,it
-//            ))
-            navController.navigate(R.id.nav_read)
+            //todo делать сохранение книги в БД
+            mainViewModel.sharedPref.saveBook(
+                SharedPrefBookData(
+                    mainViewModel.lastBookId.value ?: -1, it
+                )
+            )
+            if (it != -1)
+                navController.navigate(R.id.nav_read)
         })
     }
 }

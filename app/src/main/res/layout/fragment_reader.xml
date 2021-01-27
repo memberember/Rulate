@@ -4,16 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/tv_content"
+            style="@style/ordinaryText"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/tv_read_warning"

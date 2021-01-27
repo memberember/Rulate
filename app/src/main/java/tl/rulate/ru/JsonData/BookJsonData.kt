@@ -23,7 +23,7 @@ data class BookJsonData(val status: String, val msg: String, val response: Respo
         val year: String,
         val chapters_total: Int,
         val adult: Int,
-        //val team,
+        val team:String,
         val chapters: List<Chapter>,
         val comments: List<Comment>,
         val bookmark: Int,

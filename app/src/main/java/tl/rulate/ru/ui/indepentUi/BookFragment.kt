@@ -91,12 +91,16 @@ class BookFragment : Fragment() {
             it.let {
                 Picasso.with(context)
                     .load(it.img)
-                    .placeholder(R.drawable.ic_android_black_24dp)
-                    .error(R.drawable.ic_android_black_24dp)
+                    .placeholder(R.drawable.ic_baseline_highlight_off_24)
+                    .error(R.drawable.ic_baseline_highlight_off_24)
                     .into(iv_book_img)
-                tv_book_description.setText(Html.fromHtml(bookViewModel.book.value!!.description))
-                tv_book_title.setText(bookViewModel.book.value!!.t_title)
+                tv_book_description.setText(Html.fromHtml(it.description))
+                tv_book_title.setText("${it.t_title}/${it.s_title}")
+                tv_quality_rating.text = it.quality_rating
+                tv_rating.text = it.rating
                 chaptersAdapter.set(it.chapters.toMutableList())
+                tv_author_name.text = it.writer
+                tv_origin_status.text = it.origin_status
             }
         })
     }
